@@ -1,7 +1,13 @@
 import { splitter } from "./card";
 import s from "./styles.module.scss";
 
-export function Card({ text, id }: { text: string; id: string }) {
+interface ICard {
+  text: string;
+  id: string;
+  fontSizeList: number;
+}
+
+export function Card({ text, id, fontSizeList }: ICard) {
   const data = splitter(text);
 
   if (!data) return null;
@@ -28,7 +34,7 @@ export function Card({ text, id }: { text: string; id: string }) {
         </div>
 
         <div className={s.content}>
-          <ul>
+          <ul style={{ fontSize: fontSizeList }}>
             {data.list.map((item, i) => (
               <li key={item + i} dangerouslySetInnerHTML={{ __html: item }} />
             ))}

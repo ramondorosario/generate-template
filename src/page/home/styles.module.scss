@@ -35,13 +35,41 @@
       transition: all 0.1s linear;
 
       font-family: "Aileron-Regular", sans-serif;
-
-      &:hover,
-      &:focus {
-        box-shadow: 0 0 2px 2px rgba(#e72a81, 0.2);
-        border-color: #e72a81;
-      }
     }
+  }
+
+  input[type="number"],
+  textarea {
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 2px 2px rgba(#e72a81, 0.2);
+      border-color: #e72a81;
+    }
+  }
+
+  input[type="number"] {
+    padding: 8px;
+    border-radius: 4px;
+    outline: none;
+    margin-top: 4px;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 4px;
+  }
+
+  .btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 500px;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .settings {
+    display: flex;
+    flex-direction: column;
   }
 
   button {
@@ -54,11 +82,10 @@
     border-radius: 4px;
     cursor: pointer;
 
-    margin: 24px 0;
+    margin: 24px auto;
 
     &.btnGenerate {
       margin: 0;
-      margin-bottom: 24px;
     }
 
     transition: all 0.1s linear;
