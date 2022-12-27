@@ -7,19 +7,22 @@ export function Home() {
   const [text, setText] = useState<string>("");
   const [generate, setGenerate] = useState<boolean>(false);
 
-  function onClick() {
-    html2canvas(document.querySelector("#capture")!).then((canvas) => {
-      const cardUrl = canvas.toDataURL("image/png", 1);
-      const newUrl = cardUrl.replace(
-        /^data:image\/png/,
-        "data:application/octet-stream"
-      );
+  async function downloadImage() {
+    const element = document.getElementById("capture")!;
+    const canvas = await html2canvas(element);
+    const image = canvas.toDataURL("image/png", 1.0);
 
-      const link = document.createElement("a");
-      link.download = "card.png";
-      link.href = newUrl;
-      link.click();
-    });
+    const fakeLink = document.createElement("a");
+    fakeLink.style.display = "none";
+    fakeLink.download = "card.png";
+
+    fakeLink.href = image;
+
+    document.body.appendChild(fakeLink);
+    fakeLink.click();
+    document.body.removeChild(fakeLink);
+
+    fakeLink.remove();
   }
 
   return (
@@ -41,7 +44,7 @@ export function Home() {
       {generate && text && (
         <>
           <Card id="capture" text={text} />
-          <button onClick={onClick}>Baixar template</button>
+          <button onClick={downloadImage}>Baixar template</button>
         </>
       )}
     </div>
