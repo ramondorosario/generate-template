@@ -10,6 +10,7 @@ export function Home() {
   function onClick() {
     html2canvas(document.querySelector("#capture")!, {
       useCORS: true,
+      scale: 3,
       imageTimeout: 15000,
     }).then((canvas) => {
       document
