@@ -1,4 +1,5 @@
-import html2canvas from "html2canvas";
+// import html2canvas from "html2canvas";
+import { toPng } from "html-to-image";
 import { useState } from "react";
 import { Card } from "../../components/card";
 import s from "./styles.module.scss";
@@ -9,21 +10,31 @@ export function Home() {
 
   async function downloadImage() {
     const element = document.getElementById("capture")!;
-    const canvas = await html2canvas(element);
-    const image = canvas.toDataURL("image/png", 1.0);
+    const dataUrl = await toPng(element);
 
-    const fakeLink = document.createElement("a");
-    fakeLink.style.display = "none";
-    fakeLink.download = "card.png";
-
-    fakeLink.href = image;
-
-    document.body.appendChild(fakeLink);
-    fakeLink.click();
-    document.body.removeChild(fakeLink);
-
-    fakeLink.remove();
+    const link = document.createElement("a");
+    link.download = "html-to-img.png";
+    link.href = dataUrl;
+    link.click();
   }
+
+  //   async function downloadImage() {
+  //     const element = document.getElementById("capture")!;
+  //     const canvas = await html2canvas(element);
+  //     const image = canvas.toDataURL("image/png", 1.0);
+
+  //     const fakeLink = document.createElement("a");
+  //     fakeLink.style.display = "none";
+  //     fakeLink.download = "card.png";
+
+  //     fakeLink.href = image;
+
+  //     document.body.appendChild(fakeLink);
+  //     fakeLink.click();
+  //     document.body.removeChild(fakeLink);
+
+  //     fakeLink.remove();
+  //   }
 
   return (
     <div className={s.container}>
