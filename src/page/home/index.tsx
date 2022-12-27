@@ -1,5 +1,5 @@
 import html2canvas from "html2canvas";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Card } from "../../components/card";
 import s from "./styles.module.scss";
 
