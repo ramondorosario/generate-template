@@ -9,13 +9,20 @@ export function Home() {
 
   function onClick() {
     html2canvas(document.querySelector("#capture")!, {
-      useCORS: true,
-      scale: 3,
+      allowTaint: true,
+      removeContainer: true,
+      backgroundColor: null,
       imageTimeout: 15000,
+      logging: true,
+      scale: 2,
+      useCORS: true,
     }).then((canvas) => {
-      document
-        .getElementById("viewportMeta")!
-        .setAttribute("content", "width=800");
+      if (window.screen.width < 1024) {
+        document
+          .getElementById("viewportMeta")!
+          .setAttribute("content", "width=device-width, initial-scale=1");
+      }
+
       const cardUrl = canvas.toDataURL("image/png", 1);
 
       const link = document.createElement("a");
