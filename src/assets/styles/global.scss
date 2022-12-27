@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Aileron-Heavy";
+  src: url("../fonts/Aileron-Heavy.otf");
+}
+
+@font-face {
+  font-family: "Aileron-Regular";
+  src: url("../fonts/Aileron-Regular.otf");
+}
+
+@font-face {
+  font-family: "Aileron-Light";
+  src: url("../fonts/Aileron-Light.otf");
+}
+
+body {
+  font-family: "Aileron-Regular", sans-serif;
+
+  background-color: #ccc;
+
+  padding: 24px;
+}
