@@ -8,26 +8,16 @@ export function Home() {
   const [generate, setGenerate] = useState<boolean>(false);
 
   function onClick() {
-    html2canvas(document.querySelector("#capture")!, {
-      allowTaint: true,
-      removeContainer: true,
-      backgroundColor: null,
-      imageTimeout: 15000,
-      logging: true,
-      scale: 2,
-      useCORS: true,
-    }).then((canvas) => {
-      if (window.screen.width < 1024) {
-        document
-          .getElementById("viewportMeta")!
-          .setAttribute("content", "width=device-width, initial-scale=1");
-      }
-
+    html2canvas(document.querySelector("#capture")!).then((canvas) => {
       const cardUrl = canvas.toDataURL("image/png", 1);
+      const newUrl = cardUrl.replace(
+        /^data:image\/png/,
+        "data:application/octet-stream"
+      );
 
       const link = document.createElement("a");
       link.download = "card.png";
-      link.href = cardUrl;
+      link.href = newUrl;
       link.click();
     });
   }
