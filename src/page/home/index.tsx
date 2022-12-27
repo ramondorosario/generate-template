@@ -8,7 +8,16 @@ export function Home() {
   const [generate, setGenerate] = useState<boolean>(false);
 
   function onClick() {
+    const vp = document.getElementById("viewportMeta")!.getAttribute("content");
+
+    document
+      .getElementById("viewportMeta")!
+      .setAttribute("content", "width=800");
+
     html2canvas(document.querySelector("#capture")!).then((canvas) => {
+      document
+        .getElementById("viewportMeta")!
+        .setAttribute("content", "width=800");
       const cardUrl = canvas.toDataURL("image/png", 1);
 
       const link = document.createElement("a");
