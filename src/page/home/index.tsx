@@ -8,13 +8,10 @@ export function Home() {
   const [generate, setGenerate] = useState<boolean>(false);
 
   function onClick() {
-    const vp = document.getElementById("viewportMeta")!.getAttribute("content");
-
-    document
-      .getElementById("viewportMeta")!
-      .setAttribute("content", "width=800");
-
-    html2canvas(document.querySelector("#capture")!).then((canvas) => {
+    html2canvas(document.querySelector("#capture")!, {
+      useCORS: true,
+      imageTimeout: 15000,
+    }).then((canvas) => {
       document
         .getElementById("viewportMeta")!
         .setAttribute("content", "width=800");
