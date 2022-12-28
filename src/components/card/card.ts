@@ -16,7 +16,9 @@ export function formatCodes(arr: string[]) {
 }
 
 function formatList(arr: string[]) {
-  const list = arr.map((v) => v.replace(/\$.\s/g, ""));
+  const list = arr
+    .map((v) => v.replace(/\$.\s/g, ""))
+    .filter((item) => item !== ":");
   const newList = list.map((item) => {
     const split = item.split(/:/);
 

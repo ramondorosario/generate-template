@@ -1,15 +1,16 @@
 import { toPng } from "html-to-image";
 import { useState } from "react";
-import { Card } from "../../components/card";
+import { Card, TemplateType } from "../../components/card";
 import s from "./styles.module.scss";
 
 export function Home() {
   const [text, setText] = useState<string>("");
+  const [templateValue, setTemplateValue] = useState<TemplateType>("generic");
   const [generate, setGenerate] = useState<boolean>(false);
   const [settingsFontSizeList, setSettingsFontSizeList] = useState<{
-    fontSize: number;
+    fontSize: string;
     showInput: boolean;
-  }>({ fontSize: 22, showInput: false });
+  }>({ fontSize: "22", showInput: false });
 
   async function downloadImage() {
     const element = document.getElementById("capture")!;
@@ -54,6 +55,19 @@ export function Home() {
       </div>
       <div className={s.btns}>
         <div className={s.settings}>
+          <div className={s.containerSelect}>
+            <label htmlFor="select">Template</label>
+            <select
+              name="select"
+              id="select"
+              value={templateValue}
+              onChange={(e) => setTemplateValue(e.target.value as TemplateType)}
+            >
+              <option value="FIEB">FIEB</option>
+              <option value="generic">Genérico</option>
+            </select>
+          </div>
+
           <div>
             <input
               type="checkbox"
@@ -62,20 +76,21 @@ export function Home() {
                 const checked = e.target.checked;
                 setSettingsFontSizeList({
                   showInput: checked,
-                  fontSize: checked ? settingsFontSizeList.fontSize : 22,
+                  fontSize: checked ? settingsFontSizeList.fontSize : "22",
                 });
               }}
             />
             <label htmlFor="checkbox">Editar fonte da lista</label>
           </div>
+
           {settingsFontSizeList.showInput && (
             <input
-              type="number"
-              value={settingsFontSizeList.fontSize}
+              type="tel"
+              value={settingsFontSizeList.fontSize.toString()}
               onChange={(e) =>
                 setSettingsFontSizeList({
                   ...settingsFontSizeList,
-                  fontSize: e.target.valueAsNumber,
+                  fontSize: e.target.value,
                 })
               }
             />
@@ -90,8 +105,9 @@ export function Home() {
         <>
           <Card
             id="capture"
-            fontSizeList={settingsFontSizeList.fontSize}
+            fontSizeList={Number(settingsFontSizeList.fontSize)}
             text={text}
+            templateValue={templateValue}
           />
           <button onClick={downloadImage}>Baixar template</button>
         </>

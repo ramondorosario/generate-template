@@ -1,13 +1,19 @@
 import { splitter } from "./card";
 import s from "./styles.module.scss";
 
+import BackgroundFIEB from "../../assets/images/template-FIEB.svg";
+import BackgroundGeneric from "../../assets/images/template-generic.svg";
+
+export type TemplateType = "FIEB" | "generic";
+
 interface ICard {
   text: string;
   id: string;
   fontSizeList: number;
+  templateValue: TemplateType;
 }
 
-export function Card({ text, id, fontSizeList }: ICard) {
+export function Card({ text, id, fontSizeList, templateValue }: ICard) {
   const data = splitter(text);
 
   if (!data) return null;
@@ -19,7 +25,13 @@ export function Card({ text, id, fontSizeList }: ICard) {
 
   return (
     <div className={s.container} id={id}>
-      <main>
+      <main
+        style={{
+          backgroundImage: `url(${
+            templateValue === "FIEB" ? BackgroundFIEB : BackgroundGeneric
+          })`,
+        }}
+      >
         <div className={s.header}>
           <p className={s.regular}>{amountJobsText}</p>
           <p>{data.role}</p>
