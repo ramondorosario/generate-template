@@ -23,7 +23,12 @@ export function Card({ text, id, fontSizeList }: ICard) {
         <div className={s.header}>
           <p className={s.regular}>{amountJobsText}</p>
           <p>{data.role}</p>
-          <p>{`Código da vaga: ${data.rp.codes}`}</p>
+          <p>
+            Código da vaga:{" "}
+            <span className={data.rp.amount >= 3 ? s.breakline : ""}>
+              {data.rp.codes}
+            </span>
+          </p>
         </div>
 
         <div className={s.row}>
