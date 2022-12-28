@@ -85,7 +85,7 @@ export function Home() {
 
           {settingsFontSizeList.showInput && (
             <input
-              type="tel"
+              type="text"
               value={settingsFontSizeList.fontSize.toString()}
               onChange={(e) =>
                 setSettingsFontSizeList({

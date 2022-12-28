@@ -17,13 +17,15 @@ export function formatCodes(arr: string[]) {
 
 function formatList(arr: string[]) {
   const list = arr
-    .map((v) => v.replace(/\$.\s/g, ""))
-    .filter((item) => item !== ":");
+    .map((v) => v.trim().replace(/\$.\s/g, ""))
+    .filter((v) => !!v);
   const newList = list.map((item) => {
     const split = item.split(/:/);
 
     return `<b>${split[0]}:</b> ${split.slice(1).join(" ")}`;
   });
+
+  console.log(list);
 
   return newList;
 }
