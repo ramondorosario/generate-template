@@ -11,9 +11,10 @@ interface ICard {
   id: string;
   fontSizeList: number;
   templateValue: TemplateType;
+  space: number;
 }
 
-export function Card({ text, id, fontSizeList, templateValue }: ICard) {
+export function Card({ text, id, fontSizeList, templateValue, space }: ICard) {
   const data = splitter(text);
 
   if (!data) return null;
@@ -51,7 +52,7 @@ export function Card({ text, id, fontSizeList, templateValue }: ICard) {
         </div>
 
         <div className={s.content}>
-          <ul style={{ fontSize: fontSizeList }}>
+          <ul style={{ fontSize: fontSizeList, gap: space }}>
             {data.list.map((item, i) => (
               <li key={item + i} dangerouslySetInnerHTML={{ __html: item }} />
             ))}

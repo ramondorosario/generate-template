@@ -25,8 +25,6 @@ function formatList(arr: string[]) {
     return `<b>${split[0]}:</b> ${split.slice(1).join(" ")}`;
   });
 
-  console.log(list);
-
   return newList;
 }
 

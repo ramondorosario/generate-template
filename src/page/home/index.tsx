@@ -10,7 +10,8 @@ export function Home() {
   const [settingsFontSizeList, setSettingsFontSizeList] = useState<{
     fontSize: string;
     showInput: boolean;
-  }>({ fontSize: "22", showInput: false });
+    space: string;
+  }>({ fontSize: "22", showInput: false, space: "16" });
 
   async function downloadImage() {
     const element = document.getElementById("capture")!;
@@ -77,23 +78,44 @@ export function Home() {
                 setSettingsFontSizeList({
                   showInput: checked,
                   fontSize: checked ? settingsFontSizeList.fontSize : "22",
+                  space: checked ? settingsFontSizeList.space : "16",
                 });
               }}
             />
-            <label htmlFor="checkbox">Editar fonte da lista</label>
+            <label htmlFor="checkbox">Configurar lista</label>
           </div>
 
           {settingsFontSizeList.showInput && (
-            <input
-              type="text"
-              value={settingsFontSizeList.fontSize.toString()}
-              onChange={(e) =>
-                setSettingsFontSizeList({
-                  ...settingsFontSizeList,
-                  fontSize: e.target.value,
-                })
-              }
-            />
+            <>
+              <div>
+                <label htmlFor="font">Tamanho: </label>
+                <input
+                  id="font"
+                  type="text"
+                  value={settingsFontSizeList.fontSize.toString()}
+                  onChange={(e) =>
+                    setSettingsFontSizeList({
+                      ...settingsFontSizeList,
+                      fontSize: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <label htmlFor="space">Espaçamento: </label>
+                <input
+                  id="space"
+                  type="text"
+                  value={settingsFontSizeList.space.toString()}
+                  onChange={(e) =>
+                    setSettingsFontSizeList({
+                      ...settingsFontSizeList,
+                      space: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            </>
           )}
         </div>
 
@@ -106,6 +128,7 @@ export function Home() {
           <Card
             id="capture"
             fontSizeList={Number(settingsFontSizeList.fontSize)}
+            space={Number(settingsFontSizeList.space)}
             text={text}
             templateValue={templateValue}
           />
