@@ -68,7 +68,7 @@ export function Home() {
                 });
               }}
             />
-            <label htmlFor="header">Configurar cabeçalho</label>
+            <label htmlFor="header">Config. cabeçalho</label>
           </div>
 
           {settingsHeader.showInput && (
@@ -105,7 +105,7 @@ export function Home() {
                 });
               }}
             />
-            <label htmlFor="checkbox">Configurar lista</label>
+            <label htmlFor="checkbox">Config. lista</label>
           </div>
 
           {settingsFontSizeList.showInput && (
