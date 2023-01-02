@@ -15,9 +15,17 @@ interface ICard {
     header: number;
     list: number;
   };
+  centerLocale?: boolean;
 }
 
-export function Card({ text, id, fontSizeList, templateValue, spaces }: ICard) {
+export function Card({
+  text,
+  id,
+  fontSizeList,
+  templateValue,
+  spaces,
+  centerLocale = false,
+}: ICard) {
   const data = splitter(text);
 
   if (!data) return null;
@@ -48,7 +56,7 @@ export function Card({ text, id, fontSizeList, templateValue, spaces }: ICard) {
         </div>
 
         <div className={`${s.row} ${s[templateValue]}`}>
-          <p>{data.locale}</p>
+          <p style={{ paddingTop: centerLocale ? 15 : 0 }}>{data.locale}</p>
           <p>
             Período de inscrição: <span>{data.registrationDeadline}</span>
           </p>

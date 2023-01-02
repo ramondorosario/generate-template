@@ -7,6 +7,7 @@ export function Home() {
   const [text, setText] = useState<string>("");
   const [templateValue, setTemplateValue] = useState<TemplateType>("generic");
   const [generate, setGenerate] = useState<boolean>(false);
+  const [centerLocale, setCenterLocale] = useState<boolean>(false);
   const [settingsFontSizeList, setSettingsFontSizeList] = useState<{
     fontSize: string;
     showInput: boolean;
@@ -156,7 +157,16 @@ export function Home() {
             }}
             text={text}
             templateValue={templateValue}
+            centerLocale={centerLocale}
           />
+          <div style={{ marginTop: 12 }}>
+            <input
+              id="center"
+              type="checkbox"
+              onChange={(e) => setCenterLocale(e.target.checked)}
+            />
+            <label htmlFor="center">Centralizar localidade</label>
+          </div>
           <button onClick={downloadImage}>Baixar template</button>
         </>
       )}
