@@ -18,7 +18,7 @@ export function Home() {
   }>({ showInput: false, space: "24" });
 
   async function downloadImage() {
-    const element = document.getElementById("capture")!;
+    const element = document.getElementById("card")!;
     const dataUrl = await toPng(element);
 
     const link = document.createElement("a");
@@ -148,7 +148,7 @@ export function Home() {
       {generate && text && (
         <>
           <Card
-            id="capture"
+            id="card"
             fontSizeList={Number(settingsFontSizeList.fontSize)}
             spaces={{
               header: Number(settingsHeader.space),
