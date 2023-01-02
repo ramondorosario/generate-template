@@ -48,7 +48,6 @@
       display: flex;
       align-items: center;
       font-family: "Aileron-Heavy", sans-serif;
-      position: sticky;
 
       &.FIEB {
         margin: -2px 0 28px 60px;
@@ -64,6 +63,7 @@
         &:first-child {
           font-size: 22px;
           margin-right: 250px;
+          padding-top: 15px;
         }
 
         span {
