@@ -64,7 +64,7 @@ export function Home() {
                 const checked = e.target.checked;
                 setSettingsHeader({
                   showInput: checked,
-                  space: checked ? settingsFontSizeList.space : "24",
+                  space: checked ? settingsHeader.space : "24",
                 });
               }}
             />
