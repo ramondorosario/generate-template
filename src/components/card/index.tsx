@@ -61,7 +61,7 @@ export function Card({ text, id, fontSizeList, templateValue, spaces }: ICard) {
             ))}
           </ul>
 
-          <div className={s.footer}>
+          <div className={`${s.footer} ${s[templateValue]}`}>
             <p>
               <span>
                 Se interessou pela vaga? <br />
