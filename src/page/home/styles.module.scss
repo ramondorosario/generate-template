@@ -54,32 +54,39 @@
     border-radius: 4px;
     outline: none;
     margin-top: 4px;
-    width: 160px;
+    width: 140px;
   }
 
   input[type="checkbox"] {
     margin-right: 4px;
   }
 
-  .containerSelect {
+  .settings {
     display: flex;
-    flex-direction: column;
-    margin-bottom: 8px;
-    width: 100%;
-  }
-
-  .btns {
-    display: flex;
-    align-items: center;
     justify-content: space-between;
     max-width: 500px;
     width: 100%;
     margin-bottom: 24px;
-  }
 
-  .settings {
-    display: flex;
-    flex-direction: column;
+    > div {
+      display: flex;
+      padding-top: 32px;
+
+      &:first-child {
+        flex-direction: column;
+        padding-top: 0;
+      }
+
+      &.containerAdjusts {
+        flex-direction: column;
+        position: relative;
+
+        .adjusts {
+          width: min-content;
+          margin-top: 4px;
+        }
+      }
+    }
   }
 
   button {
@@ -96,6 +103,7 @@
 
     &.btnGenerate {
       margin: 0;
+      margin-bottom: 32px;
     }
 
     transition: all 0.1s linear;
