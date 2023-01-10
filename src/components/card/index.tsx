@@ -56,7 +56,7 @@ export function Card({
         </div>
 
         <div className={`${s.row} ${s[templateValue]}`}>
-          <p style={{ paddingTop: centerLocale ? 20 : 0 }}>{data.locale}</p>
+          <p style={{ paddingTop: centerLocale ? 24 : 0 }}>{data.locale}</p>
           <p style={{ paddingTop: centerLocale ? 10 : 0 }}>
             Período de inscrição: <span>{data.registrationDeadline}</span>
           </p>
