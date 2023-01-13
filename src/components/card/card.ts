@@ -17,8 +17,11 @@ export function formatCodes(arr: string[]) {
 
 function formatList(arr: string[]) {
   const list = arr
-    .map((v) => v.trim().replace(/\$.\s/g, ""))
-    .filter((v) => !!v);
+    .map((v, i) => {
+      return v.trim().replace(/\$.\s/g, "");
+    })
+    .filter((v) => !!v && v !== "");
+
   const newList = list.map((item) => {
     const split = item.split(/:/);
 
@@ -33,7 +36,7 @@ export function splitter(text: string): ISplitter | null {
 
   const [role, locale, time, rp, ...list] = text
     .split(/\n/)
-    .filter((v) => v !== "");
+    .filter((v) => !!v && v.length > 1);
 
   if (!rp || !list.length) return null;
 
