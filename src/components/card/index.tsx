@@ -1,4 +1,4 @@
-import { splitter } from "./card";
+import { ISplitter, splitter } from "./card";
 import s from "./styles.module.scss";
 
 import BackgroundFIEB from "../../assets/images/template-FIEB.svg";
@@ -7,7 +7,7 @@ import BackgroundGeneric from "../../assets/images/template-generic.svg";
 export type TemplateType = "FIEB" | "generic";
 
 interface ICard {
-  text: string;
+  data: ISplitter | null;
   id: string;
   fontSizeList: number;
   templateValue: TemplateType;
@@ -19,15 +19,13 @@ interface ICard {
 }
 
 export function Card({
-  text,
+  data,
   id,
   fontSizeList,
   templateValue,
   spaces,
   centerLocale = false,
 }: ICard) {
-  const data = splitter(text);
-
   if (!data) return null;
 
   const amount = data.rp.amount;

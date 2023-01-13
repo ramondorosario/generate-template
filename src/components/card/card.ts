@@ -1,4 +1,4 @@
-interface ISplitter {
+export interface ISplitter {
   role: string;
   locale: string;
   registrationDeadline: string;

@@ -1,6 +1,7 @@
 import { toPng } from "html-to-image";
 import { useState } from "react";
 import { Card, TemplateType } from "../../components/card";
+import { splitter } from "../../components/card/card";
 import s from "./styles.module.scss";
 
 export function Home() {
@@ -27,6 +28,8 @@ export function Home() {
     link.href = dataUrl;
     link.click();
   }
+
+  const data = splitter(text);
 
   return (
     <div className={s.container}>
@@ -146,30 +149,36 @@ export function Home() {
       <button className={s.btnGenerate} onClick={() => setGenerate(true)}>
         Gerar
       </button>
-      {generate && text && (
-        <>
-          <Card
-            id="card"
-            fontSizeList={Number(settingsFontSizeList.fontSize)}
-            spaces={{
-              header: Number(settingsHeader.space),
-              list: Number(settingsFontSizeList.space),
-            }}
-            text={text}
-            templateValue={templateValue}
-            centerLocale={centerLocale}
-          />
-          <div style={{ marginTop: 12 }}>
-            <input
-              id="center"
-              type="checkbox"
-              onChange={(e) => setCenterLocale(e.target.checked)}
+      {generate &&
+        (!!data?.list ? (
+          <>
+            <Card
+              id="card"
+              fontSizeList={Number(settingsFontSizeList.fontSize)}
+              spaces={{
+                header: Number(settingsHeader.space),
+                list: Number(settingsFontSizeList.space),
+              }}
+              data={data}
+              templateValue={templateValue}
+              centerLocale={centerLocale}
             />
-            <label htmlFor="center">Centralizar localidade</label>
+            <div style={{ marginTop: 12 }}>
+              <input
+                id="center"
+                type="checkbox"
+                onChange={(e) => setCenterLocale(e.target.checked)}
+              />
+              <label htmlFor="center">Centralizar localidade</label>
+            </div>
+            <button onClick={downloadImage}>Baixar template</button>
+          </>
+        ) : (
+          <div className={s.error}>
+            Algumas informações estam faltando. Verifique se os tópicos foram
+            informados corretamente.
           </div>
-          <button onClick={downloadImage}>Baixar template</button>
-        </>
-      )}
+        ))}
     </div>
   );
 }

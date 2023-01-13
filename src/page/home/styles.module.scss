@@ -117,4 +117,13 @@
       background-color: rgba(#e72a81, 0.8);
     }
   }
+
+  .error {
+    text-align: center;
+    border: 1px solid red;
+    padding: 20px;
+    border-radius: 4px;
+    max-width: 500px;
+    background-color: rgba(255, 0, 0, 0.2);
+  }
 }
