@@ -1,7 +1,7 @@
 import { toPng } from "html-to-image";
 import { useState } from "react";
 import { Card, TemplateType } from "../../components/card";
-import { splitter } from "../../components/card/card";
+import { splitterDefault, splitterAutomatic } from "../../components/card/card";
 import s from "./styles.module.scss";
 
 export function Home() {
@@ -9,6 +9,7 @@ export function Home() {
   const [templateValue, setTemplateValue] = useState<TemplateType>("generic");
   const [generate, setGenerate] = useState<boolean>(false);
   const [centerLocale, setCenterLocale] = useState<boolean>(false);
+  const [mode, setMode] = useState<"default" | "automatic">("default");
   const [settingsFontSizeList, setSettingsFontSizeList] = useState<{
     fontSize: string;
     showInput: boolean;
@@ -29,7 +30,8 @@ export function Home() {
     link.click();
   }
 
-  const data = splitter(text);
+  const data =
+    mode === "default" ? splitterDefault(text) : splitterAutomatic(text);
 
   return (
     <div className={s.container}>
@@ -42,6 +44,17 @@ export function Home() {
           id="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="mode" style={{ marginRight: 4 }}>
+          Modo automático
+        </label>
+        <input
+          type="checkbox"
+          id="mode"
+          onChange={(e) => setMode(e.target.checked ? "automatic" : "default")}
         />
       </div>
 

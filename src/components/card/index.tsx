@@ -1,4 +1,4 @@
-import { ISplitter, splitter } from "./card";
+import { ISplitter } from "./card";
 import s from "./styles.module.scss";
 
 import BackgroundFIEB from "../../assets/images/template-FIEB.svg";
