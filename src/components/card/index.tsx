@@ -22,9 +22,17 @@ interface ICard {
     header: number;
     list: number;
   };
+  adjustPhone11: boolean;
 }
 
-export function NewCard({ data, id, fontSizes, spaces, logoValue }: ICard) {
+export function NewCard({
+  data,
+  id,
+  fontSizes,
+  spaces,
+  logoValue,
+  adjustPhone11,
+}: ICard) {
   if (!data) return null;
 
   const amount = data.rp.amount;
@@ -55,7 +63,9 @@ export function NewCard({ data, id, fontSizes, spaces, logoValue }: ICard) {
         <div className={s.footerInfos}>
           <p>
             <img src={LocaleIcon} alt="" />
-            <span>{data.locale}</span>
+            <span style={{ paddingTop: adjustPhone11 ? 15 : 0 }}>
+              {data.locale}
+            </span>
           </p>
           <p>
             <img src={CalendarIcon} alt="" />

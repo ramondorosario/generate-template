@@ -8,7 +8,7 @@ export function Home() {
   const [text, setText] = useState<string>("");
   const [logoValue, setLogoValue] = useState<LogoType>("generic");
   const [generate, setGenerate] = useState<boolean>(false);
-  //   const [centerLocale, setCenterLocale] = useState<boolean>(false);
+  const [centerLocale, setCenterLocale] = useState<boolean>(false);
   const [mode, setMode] = useState<"default" | "automatic">("automatic");
   const [settingsFontSizeList, setSettingsFontSizeList] = useState<{
     fontSize: string;
@@ -195,13 +195,13 @@ export function Home() {
               }}
               data={data}
               logoValue={logoValue}
+              adjustPhone11={centerLocale}
             />
             <div style={{ marginTop: 12 }}>
               <input
                 id="center"
                 type="checkbox"
-                // onChange={(e) => setCenterLocale(e.target.checked)}
-                onChange={() => {}}
+                onChange={(e) => setCenterLocale(e.target.checked)}
               />
               <label htmlFor="center">Centralizar localidade</label>
             </div>
