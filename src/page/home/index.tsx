@@ -1,24 +1,25 @@
 import { toPng } from "html-to-image";
 import { useState } from "react";
-import { Card, TemplateType } from "../../components/card";
 import { splitterDefault, splitterAutomatic } from "../../components/card/card";
+import { NewCard, LogoType } from "../../components/card";
 import s from "./styles.module.scss";
 
 export function Home() {
   const [text, setText] = useState<string>("");
-  const [templateValue, setTemplateValue] = useState<TemplateType>("generic");
+  const [logoValue, setLogoValue] = useState<LogoType>("generic");
   const [generate, setGenerate] = useState<boolean>(false);
-  const [centerLocale, setCenterLocale] = useState<boolean>(false);
-  const [mode, setMode] = useState<"default" | "automatic">("default");
+  //   const [centerLocale, setCenterLocale] = useState<boolean>(false);
+  const [mode, setMode] = useState<"default" | "automatic">("automatic");
   const [settingsFontSizeList, setSettingsFontSizeList] = useState<{
     fontSize: string;
     showInput: boolean;
     space: string;
-  }>({ fontSize: "22", showInput: false, space: "16" });
+  }>({ fontSize: "24", showInput: false, space: "16" });
   const [settingsHeader, setSettingsHeader] = useState<{
     showInput: boolean;
     space: string;
-  }>({ showInput: false, space: "24" });
+    fontSize: string;
+  }>({ showInput: false, space: "8", fontSize: "34" });
 
   async function downloadImage() {
     const element = document.getElementById("card")!;
@@ -54,18 +55,19 @@ export function Home() {
         <input
           type="checkbox"
           id="mode"
+          checked={mode === "automatic"}
           onChange={(e) => setMode(e.target.checked ? "automatic" : "default")}
         />
       </div>
 
       <div className={s.settings}>
         <div>
-          <label htmlFor="select">Template</label>
+          <label htmlFor="select">Logo</label>
           <select
             name="select"
             id="select"
-            value={templateValue}
-            onChange={(e) => setTemplateValue(e.target.value as TemplateType)}
+            value={logoValue}
+            onChange={(e) => setLogoValue(e.target.value as LogoType)}
           >
             <option value="FIEB">FIEB</option>
             <option value="generic">Genérico</option>
@@ -81,7 +83,8 @@ export function Home() {
                 const checked = e.target.checked;
                 setSettingsHeader({
                   showInput: checked,
-                  space: checked ? settingsHeader.space : "24",
+                  space: checked ? settingsHeader.space : "8",
+                  fontSize: checked ? settingsHeader.fontSize : "34",
                 });
               }}
             />
@@ -90,6 +93,21 @@ export function Home() {
 
           {settingsHeader.showInput && (
             <div className={s.adjusts}>
+              <div>
+                <label htmlFor="fontHeader">Tamanho: </label>
+                <input
+                  id="fontHeader"
+                  type="text"
+                  value={settingsHeader.fontSize.toString()}
+                  onChange={(e) =>
+                    setSettingsHeader({
+                      ...settingsHeader,
+                      fontSize: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
               <div>
                 <label htmlFor="spaceHeader">Espaçamento: </label>
                 <input
@@ -165,22 +183,25 @@ export function Home() {
       {generate &&
         (!!data?.list ? (
           <>
-            <Card
+            <NewCard
               id="card"
-              fontSizeList={Number(settingsFontSizeList.fontSize)}
+              fontSizes={{
+                header: Number(settingsHeader.fontSize),
+                list: Number(settingsFontSizeList.fontSize),
+              }}
               spaces={{
                 header: Number(settingsHeader.space),
                 list: Number(settingsFontSizeList.space),
               }}
               data={data}
-              templateValue={templateValue}
-              centerLocale={centerLocale}
+              logoValue={logoValue}
             />
             <div style={{ marginTop: 12 }}>
               <input
                 id="center"
                 type="checkbox"
-                onChange={(e) => setCenterLocale(e.target.checked)}
+                // onChange={(e) => setCenterLocale(e.target.checked)}
+                onChange={() => {}}
               />
               <label htmlFor="center">Centralizar localidade</label>
             </div>

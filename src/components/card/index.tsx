@@ -1,31 +1,30 @@
+import GenericLogoIcon from "../../assets/images/generic.svg";
+import FiebLogoIcon from "../../assets/images/fieb.svg";
+import LocaleIcon from "../../assets/images/locale.svg";
+import CalendarIcon from "../../assets/images/calendar.svg";
+import ClickIcon from "../../assets/images/click.svg";
+import LogoTrinnus from "../../assets/images/trinnus.svg";
 import { ISplitter } from "./card";
+
 import s from "./styles.module.scss";
 
-import BackgroundFIEB from "../../assets/images/template-FIEB.svg";
-import BackgroundGeneric from "../../assets/images/template-generic.svg";
-
-export type TemplateType = "FIEB" | "generic";
+export type LogoType = "FIEB" | "generic";
 
 interface ICard {
   data: ISplitter | null;
   id: string;
-  fontSizeList: number;
-  templateValue: TemplateType;
+  fontSizes: {
+    list: number;
+    header: number;
+  };
+  logoValue: LogoType;
   spaces: {
     header: number;
     list: number;
   };
-  centerLocale?: boolean;
 }
 
-export function Card({
-  data,
-  id,
-  fontSizeList,
-  templateValue,
-  spaces,
-  centerLocale = false,
-}: ICard) {
+export function NewCard({ data, id, fontSizes, spaces, logoValue }: ICard) {
   if (!data) return null;
 
   const amount = data.rp.amount;
@@ -35,51 +34,59 @@ export function Card({
 
   return (
     <div className={s.container} id={id}>
-      <main
-        style={{
-          backgroundImage: `url(${
-            templateValue === "FIEB" ? BackgroundFIEB : BackgroundGeneric
-          })`,
-        }}
-      >
-        <div className={s.header} style={{ gap: spaces.header }}>
-          <p className={s.regular}>{amountJobsText}</p>
-          <p>{data.role}</p>
-          <p>
-            Código da vaga:{" "}
-            <span className={data.rp.amount >= 3 ? s.breakline : ""}>
-              {data.rp.codes}
-            </span>
-          </p>
-        </div>
-
-        <div className={`${s.row} ${s[templateValue]}`}>
-          <p style={{ paddingTop: centerLocale ? 24 : 0 }}>{data.locale}</p>
-          <p style={{ paddingTop: centerLocale ? 10 : 0 }}>
-            Período de inscrição: <span>{data.registrationDeadline}</span>
-          </p>
-        </div>
-
-        <div className={s.content}>
-          <ul style={{ fontSize: fontSizeList, gap: spaces.list }}>
-            {data.list.map((item, i) => (
-              <li key={item + i} dangerouslySetInnerHTML={{ __html: item }} />
-            ))}
-          </ul>
-
-          <div className={`${s.footer} ${s[templateValue]}`}>
+      <header>
+        <div className={s.infos}>
+          <img
+            src={logoValue === "generic" ? GenericLogoIcon : FiebLogoIcon}
+            alt=""
+          />
+          <div style={{ gap: spaces.header, fontSize: fontSizes.header }}>
+            <h2>{amountJobsText}</h2>
+            <p>{data.role}</p>
             <p>
-              <span>
-                Se interessou pela vaga? <br />
+              Código da vaga:{" "}
+              <span className={data.rp.amount >= 3 ? s.breakline : ""}>
+                {data.rp.codes}
               </span>
-              Cadastre seu currículo através do portal:
-              <br /> <span>www.trinnusrh.com.br</span>
-              <br />
-              Aproveite e conheça as etapas do processo seletivo!
             </p>
           </div>
         </div>
-      </main>
+
+        <div className={s.footerInfos}>
+          <p>
+            <img src={LocaleIcon} alt="" />
+            <span>{data.locale}</span>
+          </p>
+          <p>
+            <img src={CalendarIcon} alt="" />
+            <span>
+              Período de inscrição: <br /> {data.registrationDeadline}
+            </span>
+          </p>
+        </div>
+      </header>
+
+      <section>
+        <ul style={{ fontSize: fontSizes.list, gap: spaces.list }}>
+          {data.list.map((item, i) => (
+            <li key={item + i}>{item}</li>
+          ))}
+        </ul>
+      </section>
+
+      <footer>
+        <div>
+          <img src={ClickIcon} alt="" />
+          <div>
+            <p>
+              Se interessou pela vaga? <br />
+              Cadastre seu currículo através do portal: <br />
+              www.trinnusrh.com.br
+            </p>
+          </div>
+        </div>
+        <img src={LogoTrinnus} alt="" />
+      </footer>
     </div>
   );
 }
