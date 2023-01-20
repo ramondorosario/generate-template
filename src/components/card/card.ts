@@ -25,7 +25,7 @@ function formatList(arr: string[]) {
   const newList = list.map((item) => {
     const split = item.split(/:/);
 
-    return `<b>${split[0]}:</b> ${split.slice(1).join(" ")}`;
+    return `${split[0]}: ${split.slice(1).join(" ")}`;
   });
 
   return newList;

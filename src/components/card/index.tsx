@@ -79,7 +79,7 @@ export function NewCard({
       <section>
         <ul style={{ fontSize: fontSizes.list, gap: spaces.list }}>
           {data.list.map((item, i) => (
-            <li key={item + i}>{item}</li>
+            <li key={item + i} dangerouslySetInnerHTML={{ __html: item }} />
           ))}
         </ul>
       </section>

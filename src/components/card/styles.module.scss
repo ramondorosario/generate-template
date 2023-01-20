@@ -72,27 +72,30 @@
     background-size: cover;
 
     ul {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
       height: 450px;
       margin-left: 28px;
       font-size: 24px;
+      width: 100%;
+
+      margin: -15px;
 
       li {
         color: #fff;
         font-weight: 600;
+        text-align: justify;
+        margin: 15px;
       }
     }
   }
 
   footer {
-    display: grid;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 11px auto 0;
     gap: 15px;
 
-    div {
+    > div {
       display: flex;
       align-items: center;
       font-size: 22px;
@@ -105,6 +108,7 @@
     }
 
     > img {
+      display: block;
       margin: 0 auto;
     }
   }

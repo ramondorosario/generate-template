@@ -3,6 +3,7 @@ import { useState } from "react";
 import { splitterDefault, splitterAutomatic } from "../../components/card/card";
 import { NewCard, LogoType } from "../../components/card";
 import s from "./styles.module.scss";
+import html2canvas from "html2canvas";
 
 export function Home() {
   const [text, setText] = useState<string>("");
@@ -23,12 +24,16 @@ export function Home() {
 
   async function downloadImage() {
     const element = document.getElementById("card")!;
-    const dataUrl = await toPng(element);
+    html2canvas(element, { scale: 1 }).then((v) => {
+      const link = document.createElement("a");
+      const dataUrl = v.toDataURL();
 
-    const link = document.createElement("a");
-    link.download = "card.png";
-    link.href = dataUrl;
-    link.click();
+      link.download = "card.png";
+      link.href = dataUrl;
+      link.click();
+    });
+
+    // const dataUrl = await toPng(element);
   }
 
   const data =
