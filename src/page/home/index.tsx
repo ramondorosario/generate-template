@@ -1,4 +1,3 @@
-import { toPng } from "html-to-image";
 import { useState } from "react";
 import { splitterDefault, splitterAutomatic } from "../../components/card/card";
 import { NewCard, LogoType } from "../../components/card";
