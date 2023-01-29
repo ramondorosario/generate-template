@@ -22,7 +22,8 @@
 body {
   font-family: "Aileron-Regular", sans-serif;
   background-color: #ccc;
-  padding: 24px;
+  min-height: 100vh;
+  //   padding: 24px;
 
   @media (max-width: 850px) {
     display: flex;
